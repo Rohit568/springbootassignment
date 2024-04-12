@@ -51,13 +51,9 @@ public class CommentServiceTest {
         mockComments.add(comment1);
         mockComments.add(comment2);
         when(commentRepository.findAll()).thenReturn(mockComments);
-
-        // Calling the service method
         List<Comment> comments = commentService.retriveallthecomments();
 
-        // Verifying the results
         assertEquals(2, comments.size());
-        // You can add more assertions to verify the content of comments if needed
     }
 
     @Test
@@ -70,31 +66,28 @@ public class CommentServiceTest {
         List<Comment> comments = commentService.retrievcommentbyusername(username);
 
         assertEquals(1, comments.size());
-        // You can add more assertions to verify the content of comments if needed
     }
 
     @Test
     public void testRetrieveCommentsByDate() {
         LocalDate date = LocalDate.now();
         List<Comment> mockComments = new ArrayList<>();
-        mockComments.add(new Comment(/* comment details here */));
+        mockComments.add(comment1);
         when(commentRepository.findCommentByDateOfComment(date)).thenReturn(mockComments);
 
         List<Comment> comments = commentService.retrivecommentsbydate(date);
 
         assertEquals(1, comments.size());
-        // You can add more assertions to verify the content of comments if needed
     }
 
     @Test
     public void testAddValue() {
-        Comment commentToAdd = new Comment(/* comment details here */);
-        LocalDate today = LocalDate.now();
-        when(commentRepository.save(any(Comment.class))).thenReturn(commentToAdd);
 
-        Comment addedComment = commentService.addvalue(commentToAdd);
+        LocalDate today = LocalDate.now();
+        when(commentRepository.save(any(Comment.class))).thenReturn(comment1);
+
+        Comment addedComment = commentService.addvalue(comment1);
 
         assertEquals(today, addedComment.getDateOfComment());
-        // You can add more assertions to verify other properties of the addedComment if needed
     }
 }
